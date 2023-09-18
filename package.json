@@ -1,0 +1,26 @@
+{
+  "name": "wslconfig-generator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "npx tailwindcss -i ./src/main.css -o ./web/assets/css/wslconfig-gen.css",
+    "prod": "npx tailwindcss -i ./src/main.css -o ./web/assets/css/wslconfig-gen.min.css --minify",
+    "watch:dev": "npx tailwindcss -i ./src/main.css -D ./web/assets/css/wslconfig-gen.css --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JGreatorex/wslconfig-generator.git"
+  },
+  "author": "",
+  "license": "GNU GENERAL PUBLIC LICENSE V3",
+  "bugs": {
+    "url": "https://github.com/JGreatorex/wslconfig-generator/issues"
+  },
+  "homepage": "https://github.com/JGreatorex/wslconfig-generator#readme",
+  "devDependencies": {
+    "autoprefixer": "^10.4.15",
+    "tailwindcss": "^3.3.3"
+  }
+}
