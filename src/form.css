@@ -1,0 +1,30 @@
+label {
+    @apply block font-semibold;
+}
+
+fieldset {
+    @apply block bg-white mb-4 border-b border-b-slate-500 pb-4;
+}
+
+form#wslconfig_form fieldset h3 {
+    @apply mt-0;
+}
+
+form button[type=submit] {
+    @apply mx-auto block px-4 py-2 rounded bg-slate-700 text-white hover:bg-slate-500 transition-all;
+}
+
+form input[type=checkbox] + label {
+    @apply inline;
+    @apply ml-1;
+    @apply font-normal;
+}
+
+form#wslconfig_form input, select {
+    @apply rounded;
+    @apply border-slate-500;
+}
+
+form {
+    @apply p-4;
+}

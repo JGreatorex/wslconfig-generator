@@ -8,6 +8,105 @@
     <title>WSL Config Generator</title>
 </head>
 <body>
-    
+    <header class="p-5 bg-blue-500 flex">
+        <h1 class="text-white font-bold">WSL Config Generator</h1>
+        <nav class="ml-auto" id="main-nav">
+            <ul class="flex">
+                <li>
+                    <a href="#faq">FAQ</a>
+                </li>
+                <li>
+                    <a href="#wslconfig">.wslconfig</a>
+                </li>
+                <li>
+                    <a href="#wsconf">.wsconf</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="container prose p-5 md:px-0 md:mx-auto">
+            <h2 id="faq">Frequently Asked Questions</h2>
+            <h3>What is WSL?</h3>
+            <p>WSL stands for Windows Subsystem for Linux. It is a compatibility layer for Microsoft Windows that allows you to run a Linux distribution alongside your Windows installation.</p>
+            <p>You can read more about WSL on <a href="https://learn.microsoft.com/en-us/windows/wsl/install" target="_blank">microsoft.com</a></p>
+            <h3>What are the different WSL versions?</h3>
+            <p>There are two major versions of WSL:
+                <ol>
+                    <li><strong>WSL 1:</strong> This version uses a translation layer to convert Linux system calls into Windows NT kernel calls. While it allows you to run Linux utilities and some applications, it may not provide full compatibility with all Linux software due to the translation overhead.</li>
+                    <li><strong>WSL 2:</strong> This is an updated version that provides a more complete Linux kernel environment running in a lightweight virtual machine (VM) on Windows. WSL 2 offers improved performance and better compatibility with a wider range of Linux software. It also allows for running Docker containers with Linux as the base OS.</li>
+                </ol>
+            </p>
+            <h3>What version of WSL am I running?</h3>
+            <p>You can find your current version of WSL by running the following command: <code>wsl --version</code></p>
+        </div>
+        <div class="bg-slate-200 p-10">
+            <div class="container prose mx-auto">
+                <h2 id="wslconfig">.wslconfig generator</h2>
+                <p>Use the .wslconfig generator to generate a .wslconfig file. This is used to provide tweaks and assign limits to WSL2 environments.</p>
+                <form action="/" method="post" id="wslconfig_form" class="bg-white pb-4" name="wslconfig">
+                    <fieldset>
+                        <h3>Kernel</h3>
+                        <label for="kernel">Custom Kernel</label>
+                        <input type="text" name="kernel" id="kernel" placeholder="C:\\temp\\myCustomKernel" class="w-full">
+                        <div>An absolute Windows path to a custom Linux kernel</div>
+                        <label for="kernelCommandLine">Kernal command line</label>
+                        <input type="text" name="kernelCommandLine" id="kernelCommandLine" class="w-full">
+                        <div>Additional kernel command line arguments.</div>
+                    </fieldset>
+                    <fieldset>
+                        <h3>Resources</h3>
+                        <label for="memory">Memory limit:</label>
+                        <input type="number" name="memory" id="memory" placeholder="4">
+                        <select name="memory-scale" id="memory-scale">
+                            <option value="GB" selected>GB</option>
+                            <option value="MB">MB</option>
+                        </select>
+                        <div>How much memory to assign to the WSL 2 VM. Default is 50%</div>
+                        <label for="processors">Processors:</label>
+                        <input type="number" name="processors" id="processors" placeholder="2"  class="w-full">
+                        <div>How many logical processors to assign to the WSL 2 VM.</div>
+                    </fieldset>
+                    <fieldset>
+                        <h3>Safe mode</h3>
+                        <input type="checkbox" name="safemode" id="safeMode">
+                        <label for="safeMode">Safe mode</label>
+                        <div>Run WSL in "Safe Mode" which disables many features and is intended to be used to recover distributions that are in bad states. Only available for Windows 11 and WSL version 0.66.2+.</div>
+                    </fieldset>
+                    <fieldset>
+                        <h3>Swap</h3>
+                        <label for="swapSize">Swap size (GB)</label>
+                        <input type="number" name="swapSize" id="swapSize" class="w-full" placeholder="4">
+                        <div>How much swap space to add to the WSL 2 VM, 0 for no swap file. Swap storage is disk-based RAM used when memory demand exceeds limit on hardware device.</div>
+                        <label for="swapFile">Swap file</label>
+                        <input type="text" name="swapFile" id="swapFile" class="w-full" placeholder="%USERPROFILE%\AppData\Local\Temp\swap.vhdx">
+                        <div>An absolute Windows path to the swap virtual hard disk.</div>
+                    </fieldset>
+                    <fieldset>
+                        <h3>Page reporting</h3>
+                        <input type="checkbox" name="pageReporting" id="pageReporting" checked>
+                        <label for="pageReporting">Use page reporting</label>
+                        <div>Default true setting enables Windows to reclaim unused memory allocated to WSL 2 virtual machine.</div>
+                    </fieldset>
+                    <fieldset>
+                        <h3>Windows 11 only</h3>
+                        <div class="border border-red-400 bg-red-300 p-4 rounded mb-4">
+                            <strong>Only check these options if you use Windows 11</strong>
+                        </div>
+                        <input type="checkbox" name="guiApplications" id="guiApplications" checked>
+                        <label for="guiApplications">Support GUI applications</label>
+                        <div>Boolean to turn on or off support for GUI applications (<a href="https://github.com/microsoft/wslg" target="_blank" rel="noopener noreferrer">WSLg</a>) in WSL. Only available for Windows 11.</div>
+                        <input type="checkbox" name="debugConsole" id="debugConsole">
+                        <label for="debugConsole">Turn on output console</label>
+                        <div>Boolean to turn on an output console Window that shows the contents of <code>dmesg</code> upon start of a WSL 2 distro instance. Only available for Windows 11.</div>
+                        <input type="checkbox" name="nestedVirtualisation" id="nestedVirtualisation" checked>
+                        <label for="nestedVirtualisation">Use nested virtualisation</label>
+                        <div>Boolean to turn on or off nested virtualization, enabling other nested VMs to run inside WSL 2. Only available for Windows 11.</div>
+                    </fieldset>
+                    <button type="submit">Generate .wslconfig file</button>
+                </form>
+            </div>
+        </div>
+    </main>
 </body>
 </html>

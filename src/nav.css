@@ -1,0 +1,11 @@
+#main-nav a {
+    @apply text-white;
+}
+
+#main-nav ul li {
+    @apply mr-4;
+}
+
+#main-nav ul li:last-child {
+    @apply mr-0;
+}
