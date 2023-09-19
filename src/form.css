@@ -28,3 +28,7 @@ form#wslconfig_form input, select {
 form {
     @apply p-4;
 }
+
+form div+label {
+    @apply mt-4;
+}

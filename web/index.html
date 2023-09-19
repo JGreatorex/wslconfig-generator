@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/assets/css/wslconfig-gen.css">
     <title>WSL Config Generator</title>
+    <meta name="description" content="Generates a .wslconfig file for WSL2 (Windows Subsystem for Linux)">
 </head>
 <body>
-    <header class="p-5 bg-blue-500 flex">
+    <header class="p-5 bg-slate-700 flex">
         <h1 class="text-white font-bold">WSL Config Generator</h1>
         <nav class="ml-auto" id="main-nav">
             <ul class="flex">
@@ -16,15 +17,12 @@
                     <a href="#faq">FAQ</a>
                 </li>
                 <li>
-                    <a href="#wslconfig">.wslconfig</a>
-                </li>
-                <li>
-                    <a href="#wsconf">.wsconf</a>
+                    <a href="#wslconfig">Generator</a>
                 </li>
             </ul>
         </nav>
     </header>
-    <main>
+    <main class="relative">
         <div class="container prose p-5 md:px-0 md:mx-auto">
             <h2 id="faq">Frequently Asked Questions</h2>
             <h3>What is WSL?</h3>
@@ -58,7 +56,7 @@
                         <h3>Resources</h3>
                         <label for="memory">Memory limit:</label>
                         <input type="number" name="memory" id="memory" placeholder="4">
-                        <select name="memory-scale" id="memory-scale">
+                        <select name="memoryUnit" id="memoryUnit">
                             <option value="GB" selected>GB</option>
                             <option value="MB">MB</option>
                         </select>
@@ -69,7 +67,7 @@
                     </fieldset>
                     <fieldset>
                         <h3>Safe mode</h3>
-                        <input type="checkbox" name="safemode" id="safeMode">
+                        <input type="checkbox" name="safeMode" id="safeMode">
                         <label for="safeMode">Safe mode</label>
                         <div>Run WSL in "Safe Mode" which disables many features and is intended to be used to recover distributions that are in bad states. Only available for Windows 11 and WSL version 0.66.2+.</div>
                     </fieldset>
@@ -95,18 +93,37 @@
                         </div>
                         <input type="checkbox" name="guiApplications" id="guiApplications" checked>
                         <label for="guiApplications">Support GUI applications</label>
-                        <div>Boolean to turn on or off support for GUI applications (<a href="https://github.com/microsoft/wslg" target="_blank" rel="noopener noreferrer">WSLg</a>) in WSL. Only available for Windows 11.</div>
+                        <div class="mb-4">Boolean to turn on or off support for GUI applications (<a href="https://github.com/microsoft/wslg" target="_blank" rel="noopener noreferrer">WSLg</a>) in WSL. Only available for Windows 11.</div>
                         <input type="checkbox" name="debugConsole" id="debugConsole">
                         <label for="debugConsole">Turn on output console</label>
-                        <div>Boolean to turn on an output console Window that shows the contents of <code>dmesg</code> upon start of a WSL 2 distro instance. Only available for Windows 11.</div>
+                        <div class="mb-4">Boolean to turn on an output console Window that shows the contents of <code>dmesg</code> upon start of a WSL 2 distro instance. Only available for Windows 11.</div>
                         <input type="checkbox" name="nestedVirtualisation" id="nestedVirtualisation" checked>
                         <label for="nestedVirtualisation">Use nested virtualisation</label>
                         <div>Boolean to turn on or off nested virtualization, enabling other nested VMs to run inside WSL 2. Only available for Windows 11.</div>
+                        <label for="vmIdleTimeout">VM idle timeout</label>
+                        <input type="number" name="vmIdleTimeout" id="vmIdleTimeout" class="w-full" placeholder="60000">
+                        <div>The number of milliseconds that a VM is idle, before it is shut down. Only available for Windows 11.</div>
+                        <div class="my-4 border border-slate-900 p-4 bg-slate-100">
+                            <input type="checkbox" name="w11" id="w11">
+                            <label for="w11" class="font-bold">Use Windows 11 features</label>
+                            <div>You must check this option to have Windows 11 features output.</div>
+                        </div>
                     </fieldset>
                     <button type="submit">Generate .wslconfig file</button>
                 </form>
             </div>
         </div>
+        <div id="modal" class="absolute w-full h-full top-0 left-0 bg-slate-900 bg-opacity-90 hidden">
+            <div class="modal-inner bg-white w-auto h-auto p-4 prose mx-auto mt-4">
+                <h3>.wslconfig</h3>
+                <pre id="generatedConfig" class="border-2 border-slate-900 block p-4 font-mono">Example</pre>
+                <div>
+                    Place this file at the following path: <code>C:\Users\&lt;UserName&gt;\.wslconfig</code>
+                </div>
+                <button id="closeModal" class="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-400 transition-all mt-4">Close modal</button>
+            </div>
+        </div>
     </main>
+    <script src="/assets/scripts/form_wslconfig.js"></script>
 </body>
 </html>
