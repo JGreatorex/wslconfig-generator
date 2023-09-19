@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "npx tailwindcss -i ./src/main.css -o ./web/assets/css/wslconfig-gen.css",
-    "watch:dev": "npx tailwindcss -i ./src/main.css -D ./web/assets/css/wslconfig-gen.css --watch"
+    "dev": "npx tailwindcss -i ./src/main.css -o ./web/wslconfig-gen.css",
+    "watch:dev": "npx tailwindcss -i ./src/main.css -D ./web/wslconfig-gen.css --watch"
   },
   "repository": {
     "type": "git",
